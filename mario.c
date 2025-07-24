@@ -1,5 +1,12 @@
-#include <cs50.h>
 #include <stdio.h>
+
+int get_int(const char* prompt)
+{
+    int value;
+    printf("%s", prompt);
+    scanf("%d", &value);
+    return value;
+}
 
 int main(void)
 {
@@ -31,4 +38,5 @@ int main(void)
         }
         printf("\n");
     }
+    return 0;
 }

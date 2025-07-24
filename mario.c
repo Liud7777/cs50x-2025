@@ -1,7 +1,7 @@
 #include <cs50.h>
 #include <stdio.h>
 
-int main (void)
+int main(void)
 {
     int n;
     do
@@ -12,18 +12,22 @@ int main (void)
     
     for(int i = 0; i < n; i++)
     {
+        // print sapces before hashes
         for(int j = 0; j < n - i - 1; j++)
         {
-            printf(" ");
+        printf(" ");
         }
+        // print hashes
         for(int k = 0; k < i + 1; k++)
         {
-            printf("#");
+        printf("#");
         }
+        // print gap between pyramids
         printf("  ");
+        // print second pyramid
         for(int l = 0; l < i + 1; l++)
         {
-            printf("#");
+        printf("#");
         }
         printf("\n");
     }

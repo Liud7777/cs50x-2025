@@ -1,3 +1,4 @@
+#include <cs50.h>
 #include <stdio.h>
 
 int main(void)
@@ -5,8 +6,7 @@ int main(void)
     int n;
     do
     {
-        printf("Height: ");
-        scanf("%d", &n);
+        n = get_int("Height: ");
     }
     while (n < 1);
     
@@ -31,5 +31,4 @@ int main(void)
         }
         printf("\n");
     }
-    return 0;
 }

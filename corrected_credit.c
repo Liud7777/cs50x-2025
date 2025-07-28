@@ -16,7 +16,7 @@ int main(void)
     {
         int digit = temp % 10;
 
-        // every other digit starting from the second-to-last
+        // every other digit starting from the second-to-last (position 1, 3, 5...)
         if (digit_count % 2 == 1)
         {
             digit *= 2;

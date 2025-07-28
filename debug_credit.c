@@ -11,10 +11,13 @@ int main(void)
     int digit_count = 0;
     long temp = number;
 
+    printf("DEBUG: Processing number %ld\n", number);
+
     // calculate checksum using luhn's algorithm
     while (temp > 0)
     {
         int digit = temp % 10;
+        int original_digit = digit;
 
         // every other digit starting from the second-to-last
         if (digit_count % 2 == 1)
@@ -27,15 +30,20 @@ int main(void)
             } 
         }
         
+        printf("DEBUG: Position %d, original digit %d, processed digit %d\n", 
+               digit_count, original_digit, digit);
+        
         sum += digit;
         temp /= 10;
         digit_count++;
     }
     
+    printf("DEBUG: Total digits: %d, Sum: %d\n", digit_count, sum);
+    
     // check if the card number is valid (checksum divisible by 10)
     if (sum % 10 != 0)
     {
-        printf("INVALID\n");
+        printf("INVALID (checksum failed)\n");
         return 0;
     }
 
@@ -47,6 +55,8 @@ int main(void)
     }
 
     int first_digit = first_digits / 10;
+    
+    printf("DEBUG: First two digits: %ld, First digit: %d\n", first_digits, first_digit);
 
     // determine card type based on length and starting digits
     if (digit_count == 15 && (first_digits == 34 || first_digits == 37))
@@ -63,7 +73,7 @@ int main(void)
     }
     else
     {
-        printf("INVALID\n");
+        printf("INVALID (card type not recognized)\n");
     }
     
     return 0;

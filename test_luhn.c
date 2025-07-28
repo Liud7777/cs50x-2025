@@ -1,10 +1,11 @@
-#include <cs50.h>
 #include <stdio.h>
 
 int main(void)
 {
-    // get the credit card number entered by the user
-    long number = get_long("Number: ");
+    // Test with the problematic number: 4003600000000014
+    long number = 4003600000000014L;
+    
+    printf("Testing number: %ld\n", number);
     
     // variables for luhn's algorithm
     int sum = 0;
@@ -15,8 +16,9 @@ int main(void)
     while (temp > 0)
     {
         int digit = temp % 10;
+        int original = digit;
 
-        // every other digit starting from the second-to-last
+        // every other digit starting from the second-to-last (position 1, 3, 5...)
         if (digit_count % 2 == 1)
         {
             digit *= 2;
@@ -27,15 +29,19 @@ int main(void)
             } 
         }
         
+        printf("Position %d: %d -> %d\n", digit_count, original, digit);
         sum += digit;
         temp /= 10;
         digit_count++;
     }
     
+    printf("Total sum: %d\n", sum);
+    printf("Sum %% 10 = %d\n", sum % 10);
+    
     // check if the card number is valid (checksum divisible by 10)
     if (sum % 10 != 0)
     {
-        printf("INVALID\n");
+        printf("Result: INVALID\n");
         return 0;
     }
 
@@ -47,23 +53,26 @@ int main(void)
     }
 
     int first_digit = first_digits / 10;
+    
+    printf("Digits: %d, First two digits: %ld, First digit: %d\n", 
+           digit_count, first_digits, first_digit);
 
     // determine card type based on length and starting digits
     if (digit_count == 15 && (first_digits == 34 || first_digits == 37))
     {
-        printf("AMEX\n");
+        printf("Result: AMEX\n");
     }
     else if (digit_count == 16 && (first_digits >= 51 && first_digits <= 55))
     {
-        printf("MASTERCARD\n");
+        printf("Result: MASTERCARD\n");
     }
     else if ((digit_count == 13 || digit_count == 16) && first_digit == 4)
     {
-        printf("VISA\n");
+        printf("Result: VISA\n");
     }
     else
     {
-        printf("INVALID\n");
+        printf("Result: INVALID\n");
     }
     
     return 0;
